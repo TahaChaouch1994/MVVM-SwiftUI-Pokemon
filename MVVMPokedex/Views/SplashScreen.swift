@@ -8,8 +8,32 @@
 import SwiftUI
 
 struct SplashScreen: View {
+    @State private var isActive = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        if isActive {
+            ContentView()
+        }
+        else {
+            VStack {
+                Spacer()
+                Spacer()
+                GifImage("pokemon")
+                    .frame(width: 200, height: 200)
+                Spacer()
+            }
+            .background(.white)
+            .frame(width: .infinity, height: .infinity, alignment: .topLeading)
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                    withAnimation {
+                        self.isActive = true
+                    }
+                }
+            }
+            .colorScheme(.light)
+        }
+        
     }
 }
 
