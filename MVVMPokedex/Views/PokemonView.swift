@@ -24,15 +24,14 @@ struct PokemonView: View {
             } placeholder: {
                 ProgressView()
                     .frame(width: dimensions, height: dimensions)
-                    
             }
             .background(.thinMaterial)
-            .clipShape(Circle())
+            .cornerRadius(10)
+            .shadow(color: .gray, radius: 3, x: 2, y: 2)
 
             Text("\(pokemon.name.capitalized)")
                 .font(.system(size: 16, weight: .regular, design: .monospaced))
                 .padding(.bottom, 20)
-
         }
     }
 }

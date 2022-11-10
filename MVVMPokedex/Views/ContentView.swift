@@ -26,10 +26,11 @@ struct ContentView: View {
                     }
                 }
                 .animation(.easeInOut(duration: 0.3), value: vm.filteredPokemon.count)
-                .navigationTitle("PokemonUI")
+                .navigationTitle("Pokemon")
                 .navigationBarTitleDisplayMode(.inline)
             }
-            .searchable(text: $vm.searchText)
+            .searchable(text: $vm.searchText, placement: .navigationBarDrawer(displayMode: .always))
+            
         }
         .environmentObject(vm)
     }
