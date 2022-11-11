@@ -16,21 +16,36 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                LazyVGrid(columns: adaptiveColumns, spacing: 10) {
-                    ForEach(vm.filteredPokemon) { pokemon in
-                        NavigationLink(destination: PokemonDetailView(pokemon: pokemon)
-                        ) {
-                            PokemonView(pokemon: pokemon)    
+            TabView{
+                ScrollView {
+                    LazyVGrid(columns: adaptiveColumns, spacing: 10) {
+                        ForEach(vm.filteredPokemon) { pokemon in
+                            NavigationLink(destination: PokemonDetailView(pokemon: pokemon)
+                            ) {
+                                PokemonView(pokemon: pokemon)
+                            }
                         }
                     }
+                    .animation(.easeInOut(duration: 0.3), value: vm.filteredPokemon.count)
+                    .navigationTitle("Pokemon")
+                    .navigationBarTitleDisplayMode(.inline)
                 }
-                .animation(.easeInOut(duration: 0.3), value: vm.filteredPokemon.count)
-                .navigationTitle("Pokemon")
-                .navigationBarTitleDisplayMode(.inline)
+                .tabItem {
+                    Image(systemName: "book.fill")
+                    Text("Catalog")
+                }
+                
+                Text("Favourite")
+                    .tabItem {
+                        Image(systemName: "heart.fill")
+                        Text("Favourite")
+                }
+                Text("My Pokemon")
+                    .tabItem {
+                        Image(systemName: "person.fill")
+                        Text("My Pokemon")
+                }
             }
-            .searchable(text: $vm.searchText, placement: .navigationBarDrawer(displayMode: .always))
-            
         }
         .environmentObject(vm)
     }
